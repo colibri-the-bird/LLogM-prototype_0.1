@@ -1,4 +1,5 @@
 # Freeze dependency versions here once validated.
+# Keep entries in sync across requirements.txt and requirements-optional.txt.
 # Example:
-# ruamel.yaml==0.17.35
-# transformers==4.39.0
+# ruamel.yaml==0.18.8
+# transformers==4.40.0

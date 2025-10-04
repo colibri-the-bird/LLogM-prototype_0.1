@@ -1,0 +1,18 @@
+# Optional heavy components for the encoder stack. Most of these only
+# publish wheels for Python 3.10 or earlier, so guard installs with
+# python_version markers. Developers targeting older Python versions can
+# install both this file and requirements.txt.
+
+# Core semantic parsers
+allennlp==2.10.1; python_version < "3.11"
+allennlp-models==2.10.1; python_version < "3.11"
+spacy<3.5,>=3.4; python_version < "3.11"
+stanza>=1.6,<1.11
+fastcoref>=2.1,<3; python_version < "3.11"
+amrlib>=0.8,<0.9; python_version < "3.11"
+penman>=1.2,<1.4
+
+# Event & IE adapters
+transformers[sentencepiece]>=4.39,<5
+
+# Entity linking / extras can be added here as implementations land.

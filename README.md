@@ -22,5 +22,21 @@ Refer to the individual configuration files in `configs/` for the default stack 
 selections. Each adapter within `src/encoder/` provides structured docstrings describing the
 expected behaviour and payload formats.
 
+## Python & dependencies
+
+`requirements.txt` now captures only the lightweight tooling that installs cleanly on modern
+Python releases (3.11+). Heavier NLP frameworks such as AllenNLP, spaCy 3.4, or AMR toolkits
+either lack wheels for Python 3.11 or ship large transitive dependencies, so they live in
+`requirements-optional.txt` guarded by `python_version` markers. Install both files when you
+work on machines pinned to Python 3.10 or earlier:
+
+```bash
+pip install -r requirements.txt
+pip install -r requirements-optional.txt
+```
+
+CI uses only the base file to avoid resolver backtracking loops while the project is still a
+scaffold. Update the optional list as concrete adapter implementations land.
+
 CI, formatting, and linting guidance is provided through `.pre-commit-config.yaml` and
 `.github/workflows/ci.yml`. Update both when adding new tooling or tests.
