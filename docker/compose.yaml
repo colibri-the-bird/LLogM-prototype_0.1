@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  openie5:
+    image: allenai/openie5
+    ports:
+      - "${OPENIE5_PORT:-9000}:9000"
+    environment:
+      JAVA_OPTS: "-Xmx${JAVA_HEAP:-4g}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  heideltime:
+    image: llogm/heideltime
+    ports:
+      - "${HEIDELTIME_PORT:-8012}:8012"
+    environment:
+      JAVA_OPTS: "-Xmx${JAVA_HEAP:-4g}"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8012"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

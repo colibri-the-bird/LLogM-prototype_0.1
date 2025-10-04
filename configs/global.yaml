@@ -1,0 +1,18 @@
+project_name: LLogM-prototype_0.1
+seed: 42
+
+paths:
+  cache_root: ${CACHE_ROOT}
+  hf_home: ${HF_HOME}
+  data_dir: data
+  runs_dir: runs
+  logs_dir: logs
+  exports_dir: exports
+
+logging:
+  level: INFO
+  json: true
+
+performance:
+  num_workers: 4
+  batch_bytes: 1048576

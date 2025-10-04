@@ -1,0 +1,4 @@
+# Freeze dependency versions here once validated.
+# Example:
+# ruamel.yaml==0.17.35
+# transformers==4.39.0

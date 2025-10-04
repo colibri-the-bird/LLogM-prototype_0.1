@@ -1,0 +1,20 @@
+# Core dependencies for the LLogM prototype. Pin exact versions via constraints.txt.
+ruamel.yaml
+pydantic
+requests
+httpx
+transformers
+allennlp
+allennlp-models
+amrlib
+penman
+spacy
+stanza
+fastcoref
+uvloop
+pytest
+hypothesis
+pre-commit
+black
+ruff
+isort

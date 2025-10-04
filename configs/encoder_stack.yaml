@@ -1,0 +1,36 @@
+# Toggle components and pick concrete backends
+components:
+  coref:
+    enabled: true
+    backend: fastcoref
+  srl:
+    enabled: true
+    backend: allennlp
+  frames:
+    enabled: true
+    backend: framenet_fst
+  amr:
+    enabled: true
+    backend: amrlib
+  events:
+    enabled: true
+    backends: [oneie, dygie]
+  openie:
+    enabled: true
+    url: http://${OPENIE5_HOST}:${OPENIE5_PORT}
+  entity_linking:
+    enabled: true
+    backend: blink
+  timex:
+    enabled: true
+    url: http://${HEIDELTIME_HOST}:${HEIDELTIME_PORT}
+
+ontology:
+  spec: configs/ontology.yaml
+  enforce_axioms: true
+  fix_transitivity: true
+  forbid_temporal_cycles: true
+
+export:
+  format: cgraph_json
+  include_scores: true

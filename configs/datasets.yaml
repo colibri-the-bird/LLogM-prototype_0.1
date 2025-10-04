@@ -1,0 +1,26 @@
+catalog:
+  atomic2020:
+    enabled: true
+    split: full
+  conceptnet:
+    enabled: true
+    subset: en-ru
+  glucose:
+    enabled: false
+  causenet:
+    enabled: false
+  clutrr:
+    enabled: true
+    split: v1
+  rulewriter:
+    enabled: false
+  proofwriter:
+    enabled: true
+  timebank_matres:
+    enabled: false
+
+prepare:
+  normalize_unicode: true
+  strip_html: true
+  deduplicate: true
+  shards: 8

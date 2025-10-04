@@ -1,0 +1,21 @@
+relations:
+  - name: IS_A
+    properties: [antisymmetric, transitive]
+  - name: PART_OF
+    properties: [antisymmetric, transitive]
+  - name: BEFORE
+    properties: [transitive, irreflexive]
+    conflicts: [AFTER]
+  - name: AFTER
+    properties: [transitive, irreflexive]
+    conflicts: [BEFORE]
+  - name: CAUSES
+    properties: []
+  - name: ENABLES
+    properties: []
+  - name: INHIBITS
+    properties: []
+  - name: HAS_PROPERTY
+    properties: []
+
+roles: [agent, patient, theme, cause, cond, result, time]

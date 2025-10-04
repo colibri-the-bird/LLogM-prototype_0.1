@@ -1,0 +1,14 @@
+device:
+  cuda: true
+  fallback_cpu: true
+
+limits:
+  doc_max_tokens: 4096
+  sent_max_tokens: 256
+  timeout_seconds: 30
+  parallel_docs: 8
+
+services:
+  retry:
+    attempts: 3
+    backoff_sec: 2
