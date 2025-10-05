@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+set | grep -E '^(HF_HOME|TRANSFORMERS_CACHE|PIP_CACHE_DIR|RUNPOD_MOUNT_PATH|PYTORCH_CUDA_ALLOC_CONF|NCCL_IB_DISABLE)='

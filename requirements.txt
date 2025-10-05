@@ -1,0 +1,9 @@
+# Core stack (torch comes from RunPod image template)
+transformers
+datasets
+accelerate
+bitsandbytes
+peft
+sentencepiece
+trl
+huggingface_hub

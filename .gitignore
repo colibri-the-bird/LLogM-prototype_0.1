@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Env
+.env
+.huggingface/
+
+# Caches and data
+/workspace/.cache/
+/data/
+*.cache/
+
+# Misc
+*.log
+.DS_Store

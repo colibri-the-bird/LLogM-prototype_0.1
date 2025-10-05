@@ -1,0 +1,9 @@
+# Non-interactive Accelerate config for 1-GPU RunPod A5000
+compute_environment: LOCAL_MACHINE
+device_placement: true
+distributed_type: NO
+mixed_precision: bf16
+num_processes: 1
+rdzv_backend: static
+same_network: true
+use_cpu: false
