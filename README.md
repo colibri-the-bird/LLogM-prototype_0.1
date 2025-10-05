@@ -18,16 +18,13 @@
 cd /workspace
 git clone https://github.com/colibri-the-bird/LLogM-prototype_0.1
 
-# 2) Локальные переменные окружения
-cp .env.example .env # при желании отредактируйте .env
 
-
-# 3) Установка окружения (venv + зависимости + pre-commit)
+# 2) Установка окружения (venv + зависимости + pre-commit)
 make setup
 
 
-# 4) Проверка GPU и PyTorch
+# 3) Проверка GPU и PyTorch
 make sanity
 
-# После запуска:
+# 4) После запуска:
 make onstart
