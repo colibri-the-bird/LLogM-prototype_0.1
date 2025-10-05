@@ -16,9 +16,7 @@
 ```bash
 # 1) Клонируем репозиторий в постоянный том
 cd /workspace
-git clone <ваш-remote> llogm # или mkdir llogm && cd llogm && git init
-cd llogm
-
+git clone https://github.com/colibri-the-bird/LLogM-prototype_0.1
 
 # 2) Локальные переменные окружения
 cp .env.example .env # при желании отредактируйте .env
