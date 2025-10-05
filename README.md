@@ -33,7 +33,7 @@ make sanity
 
 Рекомендуемый вариант — настроить Start Script в шаблоне пода:
 ```bash
-bash /workspace/llogm/scripts/onstart.sh
+workspace/LLogM-prototype_0.1/scripts/onstart.sh
 ```
 Скрипт создаст venv (если нет), поставит зависимости, прогонит быстрые проверки и подготовит кэш‑директории. Если не хотите трогать шаблон — можно вручную:
 
@@ -41,7 +41,7 @@ make onstart
 Повседневная работа
 # Под поднялся → onstart всё подготовил
 ```bash
-cd /workspace/llogm
+cd /workspace/LLogM-prototype_0.1
 source .venv/bin/activate
 ```
 
