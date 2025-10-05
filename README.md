@@ -28,3 +28,6 @@ make setup
 
 # 4) Проверка GPU и PyTorch
 make sanity
+
+# После запуска:
+make onstart
