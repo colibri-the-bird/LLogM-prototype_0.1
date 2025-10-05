@@ -1,38 +1,32 @@
-# LLogM Prototype — RunPod bootstrap
+# LLogM Prototype — репозиторий для RunPod (RU)
 
-Fast-start on a fresh RunPod GPU instance with reproducible configs.
 
-## Quick start (RunPod pod, SSH inside)
+Готовый каркас, чтобы поднимать новый GPU‑Pod без ручной настройки.
+
+
+## Требования
+- Под на базе образа с PyTorch и CUDA (например, шаблон RunPod PyTorch 2.8.0, Ubuntu 22.04)
+- Директория `/workspace` примонтирована как постоянный том
+- Доступ по SSH в Pod
+
+
+## Быстрый старт (первый запуск на новом Pod)
+
 
 ```bash
-# 1) Clone or create the repo under /workspace so it persists
+# 1) Клонируем репозиторий в постоянный том
 cd /workspace
-# git clone <your-remote> llogm  # or: mkdir llogm && cd llogm && git init
+git clone <ваш-remote> llogm # или mkdir llogm && cd llogm && git init
+cd llogm
 
-# 2) Put the files from this document into the repo (matching paths)
 
-# 3) One-time: prepare env from example
-cp .env.example .env
-# Optional: edit .env with your own paths/tokens
+# 2) Локальные переменные окружения
+cp .env.example .env # при желании отредактируйте .env
 
-# 4) Bootstrap
-make setup        # creates venv, installs deps, pre-commit, etc.
-make sanity       # GPU + torch check
 
-# 5) Everyday workflow
-# Option A: rely on RunPod template "Start Script" to call scripts/onstart.sh
-# Option B: run it yourself after pod starts
-make onstart
-```
+# 3) Установка окружения (venv + зависимости + pre-commit)
+make setup
 
-## Notes
 
-* Keep the repo under `/workspace` so it survives Stop/Start.
-* Configure your RunPod template env variables to match `configs/runpod.env`.
-* If you use Accelerate, launch like this:
-
-```bash
-source .env
-source .venv/bin/activate
-accelerate launch --config_file configs/accelerate.yaml your_script.py
-```
+# 4) Проверка GPU и PyTorch
+make sanity
