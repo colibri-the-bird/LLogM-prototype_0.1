@@ -16,6 +16,8 @@ setup: ## Create venv, install deps, setup pre-commit
 	@. $(VENV)/bin/activate && $(PIP) install -r requirements.txt
 	@. $(VENV)/bin/activate && $(PIP) install pre-commit
 	@. $(VENV)/bin/activate && pre-commit install || true
+	@# editable install so 'llogm' CLI works anywhere
+	@. $(VENV)/bin/activate && $(PIP) install -e
 
 onstart: ## Run startup provisioning (idempotent)
 	@bash scripts/onstart.sh
