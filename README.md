@@ -53,8 +53,10 @@ accelerate launch \
 ```
 
 # Или torchrun (DDP позже):
-# source configs/torch_distributed.env && \
-# torchrun --nproc_per_node=1 your_script.py
+```bash
+ source configs/torch_distributed.env && \
+ torchrun --nproc_per_node=1 your_script.py
+```
 Основные команды (Makefile)
 ```bash
 make setup — создать venv, обновить pip, поставить зависимости, подключить pre‑commit
