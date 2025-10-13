@@ -2,6 +2,7 @@
 import argparse, sys, subprocess, hashlib, time, shutil
 from pathlib import Path
 import yaml, requests
+import tarfile, zipfile
 from rich import print
 from rich.progress import Progress
 
@@ -54,7 +55,7 @@ def fetch_kaggle(slug: str, dest: Path, files: list):
         run(["kaggle","datasets","download","-d", slug, "-p", str(dest_tmp), "-q"])
     # unzip all zips
     for z in dest_tmp.glob("*.zip"):
-        run(["python","-m","zipfile","-e", str(z), str(dest)])
+        _safe_extract_zip(z, dest)
     # move loose files
     for f in dest_tmp.iterdir():
         if f.is_file() and f.suffix != ".zip":
@@ -67,17 +68,56 @@ def fetch_kaggle(slug: str, dest: Path, files: list):
     dest_tmp.rmdir()
 
 
+def _resolve_member_path(base: Path, member: str) -> Path:
+    candidate = (base / member).resolve()
+    base_resolved = base.resolve()
+    if candidate != base_resolved and base_resolved not in candidate.parents:
+        raise FetchError(f"Refusing to extract '{member}' outside of {base}")
+    return candidate
+
+
+def _safe_extract_zip(zp: Path, dest: Path):
+    with zipfile.ZipFile(zp) as zf:
+        for info in zf.infolist():
+            target = _resolve_member_path(dest, info.filename)
+            if info.is_dir():
+                target.mkdir(parents=True, exist_ok=True)
+                continue
+            # Zip archives can encode symlinks via external attributes. Reject them.
+            is_symlink = (info.external_attr >> 16) & 0o120000 == 0o120000
+            if is_symlink:
+                raise FetchError(f"Refusing to extract symlink '{info.filename}' from {zp}")
+            target.parent.mkdir(parents=True, exist_ok=True)
+            with zf.open(info, 'r') as src, target.open('wb') as dst:
+                shutil.copyfileobj(src, dst)
+
+
+def _safe_extract_tar(tp: Path, dest: Path):
+    with tarfile.open(tp) as tf:
+        for member in tf.getmembers():
+            target = _resolve_member_path(dest, member.name)
+            if member.issym() or member.islnk():
+                raise FetchError(f"Refusing to extract link '{member.name}' from {tp}")
+            if member.isdir():
+                target.mkdir(parents=True, exist_ok=True)
+            elif member.isfile():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with tf.extractfile(member) as src, target.open('wb') as dst:
+                    if src is None:
+                        raise FetchError(f"Failed to read member '{member.name}' from {tp}")
+                    shutil.copyfileobj(src, dst)
+            else:
+                raise FetchError(f"Unsupported tar member '{member.name}' in {tp}")
+
+
 def apply_postprocess(dest: Path, actions: list):
-    import tarfile, zipfile
     for action in actions or []:
         if 'unzip' in action:
             z = dest / action['unzip']
-            with zipfile.ZipFile(z) as zf:
-                zf.extractall(dest)
+            _safe_extract_zip(z, dest)
         if 'tar_extract' in action:
             t = dest / action['tar_extract']
-            with tarfile.open(t) as tf:
-                tf.extractall(dest)
+            _safe_extract_tar(t, dest)
 
 
 def main():
