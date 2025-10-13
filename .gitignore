@@ -15,3 +15,9 @@ __pycache__/
 # Misc
 *.log
 .DS_Store
+
+# hwr64
+hwr64/runs/
+hwr64/out/
+hwr64/data/
+hwr64/**/__pycache__/

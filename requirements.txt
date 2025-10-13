@@ -7,3 +7,16 @@ peft
 sentencepiece
 trl
 huggingface_hub
+PyYAML>=6.0
+requests>=2.32
+rich>=13.7
+numpy>=1.26
+opencv-python-headless>=4.9
+scikit-learn>=1.4
+einops>=0.7
+torchmetrics>=1.4
+onnx>=1.16
+onnxruntime>=1.19
+botorch>=0.12
+gpytorch>=1.13
+optuna>=3.6

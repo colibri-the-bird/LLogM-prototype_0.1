@@ -44,3 +44,16 @@ fmt: ## Run formatters and linters
 
 print-env: ## Show the effective env for debugging
 	@bash scripts/print_env.sh
+
+hwr64-data-setup:
+	python -m pip install -U pip && python -m pip install -r requirements.txt
+
+hwr64-data-all:
+	python hwr64/scripts/fetch_datasets.py --cfg hwr64/configs/datasets.yaml
+
+# Fetch a single dataset: make hwr64-data ONE=mnist
+hwr64-data:
+	python hwr64/scripts/fetch_datasets.py --cfg hwr64/configs/datasets.yaml --only $(ONE)
+
+hwr64-data-verify:
+	python hwr64/scripts/fetch_datasets.py --cfg hwr64/configs/datasets.yaml --verify
